@@ -35,40 +35,14 @@ public class Main {
                     break;
                 }
 
-                ArrayList<Integer> tempNextMove;
-               if (possibleMoves.size() > 1) {
-                    int indexOfBestChoice = 0; // choose the first move as best
-
-                    for (int j = 1; j < possibleMoves.size(); j++) {
-                        int[] temp = {
-                                possibleMoves.get(indexOfBestChoice).get(0),
-                                possibleMoves.get(indexOfBestChoice).get(1)
-                        };
-                        int bestChoiceOptionAmount = board.calculatePossibleMoves(temp).size();
-
-                        int[] otherOption = { // t = temporary
-                                possibleMoves.get(j).get(0),
-                                possibleMoves.get(j).get(1)
-                        };
-
-                        if (board.calculatePossibleMoves(otherOption).size() < bestChoiceOptionAmount && board.calculatePossibleMoves(otherOption).size() > 0) {
-                            indexOfBestChoice = j;
-                        }
-                    }
-
-                    tempNextMove = possibleMoves.get(indexOfBestChoice);
-                } else {
-                    tempNextMove = possibleMoves.get(0);
-                }
-
-                // convert from list to array
-                int[] nextMove = {tempNextMove.get(0), tempNextMove.get(1)};
+                // choose the best move to make and store result in array
+                int[] nextMove = board.chooseBestMove(possibleMoves);
                 board.makeMove(nextMove);
 
                 /*
                 ----------------------------- remove comment brackets too see in action*/
-                System.out.println(board);
-                waitForInput();
+                /*System.out.println(board);
+                waitForInput();*/
             }
         }
 

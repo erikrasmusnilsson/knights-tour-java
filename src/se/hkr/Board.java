@@ -127,6 +127,36 @@ public class Board {
         return moves;
     }
 
+    public int[] chooseBestMove (ArrayList<ArrayList<Integer>> possibleMoves) {
+        ArrayList<Integer> tempNextMove;
+        if (possibleMoves.size() > 1) {
+            int indexOfBestChoice = 0; // choose the first move as best
+
+            for (int j = 1; j < possibleMoves.size(); j++) {
+                int[] temp = {
+                        possibleMoves.get(indexOfBestChoice).get(0),
+                        possibleMoves.get(indexOfBestChoice).get(1)
+                };
+                int bestChoiceOptionAmount = calculatePossibleMoves(temp).size();
+
+                int[] otherOption = { // t = temporary
+                        possibleMoves.get(j).get(0),
+                        possibleMoves.get(j).get(1)
+                };
+
+                if (calculatePossibleMoves(otherOption).size() < bestChoiceOptionAmount && calculatePossibleMoves(otherOption).size() > 0) {
+                    indexOfBestChoice = j;
+                }
+            }
+
+            tempNextMove = possibleMoves.get(indexOfBestChoice);
+        } else {
+            tempNextMove = possibleMoves.get(0);
+        }
+
+        return new int[]{tempNextMove.get(0), tempNextMove.get(1)};
+    }
+
     private void addToMoves (ArrayList<ArrayList<Integer>> m, ArrayList<Integer> t) {
         boolean visited = board[t.get(0)][t.get(1)].getVisited();
         if (!visited) {
