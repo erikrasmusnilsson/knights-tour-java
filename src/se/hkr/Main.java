@@ -20,8 +20,8 @@ public class Main {
 
         Instant startTime = Instant.now();
         for (int i = 0; i < SIMULATIONS_TO_RUN; i++) { // simulate game n times
-            int[] start = { app.rand.nextInt(BOARD_SIZE - 1),
-                    app.rand.nextInt(BOARD_SIZE - 1)};
+            int[] start = { app.rand.nextInt(BOARD_SIZE),
+                    app.rand.nextInt(BOARD_SIZE)};
 
             Board board = new Board(BOARD_SIZE, BOARD_SIZE, start);
 
